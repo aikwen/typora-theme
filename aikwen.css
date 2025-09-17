@@ -1,0 +1,312 @@
+@font-face {
+    font-family: 'Hack Mono';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Hack Nerd Font Mono'),
+        url('./aikwen/HackNFM-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Hack Mono';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Hack Nerd Font Mono'),
+        url('./aikwen/HackNFM-Bold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Hack Mono';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Hack Nerd Font Mono'),
+        url('./aikwen/HackNFM-Italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'PingFang SC';
+    font-style: italic;
+    font-weight: normal;
+    src: local('PingFang SC'),
+        url('./aikwen/PingFangSC-Regular.woff2') format('woff2');
+}
+
+body {
+    font-family: "Hack Mono", "consolas", "PingFang SC";
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+/* 右侧编辑区 */
+
+#write {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* --- 标题下划线样式 --- */
+
+#write h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    /* 必须：为 ::after 的绝对定位提供基准 */
+    position: relative;
+
+    /* 标题与下划线的间隔 */
+    padding-bottom: 0.05em;
+    /* 标题与下方正文的整体间距 */
+    margin-bottom: 1em;
+
+    /* 去掉主题可能自带的边框 */
+    border-bottom: none;
+}
+
+#write h1::after {
+    content: '';
+    /* 必须：伪元素需要 content 属性 */
+    position: absolute;
+
+    /* 定位在 h1 元素的底部 */
+    bottom: 0;
+    /* 从左侧开始 */
+    left: 0;
+
+    /* 你可以在这里自定义线条宽度，比如 80% */
+    width: 100%;
+    /* 线条粗细 */
+    height: 1px;
+    /* 线条颜色 */
+    background-color: #ddd;
+}
+
+#write h2 {
+    font-size: 2rem;
+    font-weight: bold;
+
+    /* 标题与下方正文的整体间距 */
+    margin-top: 1.5rem;
+    margin-bottom: 1em;
+
+}
+
+#write h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    /* 标题与下方正文的整体间距 */
+    margin-top: 1.2rem;
+    margin-bottom: 0.7em;
+
+}
+
+#write h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    /* 标题与下方正文的整体间距 */
+    margin-top: 1rem;
+    margin-bottom: 0.5em;
+
+}
+
+#write h5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+
+    /* 标题与下方正文的整体间距 */
+    margin-top: 1rem;
+    margin-bottom: 0.5em;
+
+}
+
+/* --- 多行代码块样式 (复现 Flutter 官网 "Light" 风格) --- */
+
+#write .md-fences {
+    /* 继承字体和字号 */
+    font-family: inherit;
+    font-size: 1.2rem;
+    /* 1. 基础布局和外观 */
+    line-height: 1.5;
+    margin: 1.8rem 0;
+    /* 同时处理水平和垂直滚动 */
+    position: relative;
+
+    /* 2. 核心颜色和边框 (浅色主题) */
+    background-color: #fafafa;
+    /* 官方精确的浅灰背景色 */
+    color: #24292e;
+    /* 默认文字颜色：深灰色 */
+    border: 1px solid #dce0e3;
+    /* 一个非常细微的、更深的边框 */
+    border-radius: 8px;
+
+    /* 3. 内边距：顶部留出3em空间给模拟的标题栏 */
+    padding: 3em 1.5em 1.5em;
+}
+
+/* --- 关键：使用 ::before 伪元素模拟顶部的“标题栏” --- */
+#write .md-fences::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2.2em;
+    /* 标题栏的高度 */
+
+    background-color: #f0f0f0;
+    /* 标题栏背景色：比主背景稍深 */
+    border-bottom: 1px solid #dce0e3;
+    /* 分割线颜色与边框颜色一致 */
+
+    /* 只给顶部设置圆角，与父容器保持一致 */
+    border-top-left-radius: 7px;
+    /* 减1px防止边框露馅 */
+    border-top-right-radius: 7px;
+}
+
+/* --- 语言标签 (位于左上角) --- */
+#write .md-fences .md-lang {
+    position: absolute;
+    top: 0.7em;
+    left: 1.5em;
+
+    color: #586069;
+    /* 中等灰色 */
+    font-size: 0.85em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* --- 语法高亮：模拟浅色主题的核心颜色 --- */
+/* 注释 */
+#write .md-fences .cm-comment {
+    color: #6a737d;
+    font-style: italic;
+}
+
+/* 关键字 (如 const, function, if) */
+#write .md-fences .cm-keyword {
+    color: #d73a49;
+    /* 使用醒目的红色 */
+}
+
+/* 字符串 */
+#write .md-fences .cm-string {
+    color: #032f62;
+    /* 深蓝色 */
+}
+
+/* 数字、布尔值 (true/false) */
+#write .md-fences .cm-number,
+#write .md-fences .cm-atom {
+    color: #005cc5;
+    /* 蓝色 */
+}
+
+/* 变量、属性 */
+#write .md-fences .cm-variable,
+#write .md-fences .cm-property {
+    color: #e36209;
+    /* 橘色 */
+}
+
+
+/* --- 配套的浅色系滚动条 --- */
+#write .md-fences::-webkit-scrollbar {
+    height: 10px;
+}
+
+#write .md-fences::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+    /* 轨道背景与标题栏背景色一致 */
+    border-radius: 0 0 8px 8px;
+}
+
+#write .md-fences::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    /* 滑块颜色 */
+    border-radius: 5px;
+    border: 2px solid #f0f0f0;
+}
+
+#write .md-fences::-webkit-scrollbar-thumb:hover {
+    background-color: #9e9e9e;
+    /* 鼠标悬停时滑块颜色变深 */
+}
+
+#write .md-fences::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/* --- 行内代码块 `code` 样式 --- */
+#write :not(pre)>code {
+    /* 继承字体 (同样请确保是等宽字体) */
+    font-family: inherit;
+
+    /* 字号：比周围文字稍小一点(95%)，会显得更精致，且不易撑开行高 */
+    font-size: 0.95em;
+    margin: 0 4px;
+
+    /* 外观：与多行代码块保持一致的风格 */
+    /* 使用标题栏的颜色(#f0f0f0)作为背景，与多行代码块的主背景(#fafafa)形成微妙区分 */
+    background-color: #f0f0f0;
+    border: 1px solid #dce0e3;
+    border-radius: 4px;
+    /* 圆角可以比多行代码块稍小一些 */
+
+    /* 颜色：使用一个醒目的颜色，使其在文本中突出 */
+    /* 这里我们复用了语法高亮中的关键字颜色 */
+    color: #d73a49;
+
+    /* 间距：在文字周围提供一点呼吸空间 */
+    padding: 0.2em 0.4em;
+
+    /* 微调：轻微调整垂直位置，使其与文本的基线对齐得更美观 */
+    /* position: relative;
+    top: -2px;
+    z-index: 1; */
+    vertical-align: middle;
+}
+
+
+/* --- 引用 (Blockquote) 样式 --- */
+
+#write blockquote {
+    /* 1. 标志性的左侧边框 */
+    /* 粗细为 4px，颜色与代码块边框一致，保持主题统一性 */
+    border-left: 4px solid #dce0e3;
+    /* 2. 间距 */
+    /* 上下外边距，与其他段落分开 */
+    /* 内边距，让文字与边框和背景边缘有呼吸空间，特别是左侧 */
+    line-height: 2;
+    padding: 0.5em 1.5em;
+
+    /* 3. 背景和文字颜色 */
+    /* 使用一个非常淡的灰色背景，与正文的纯白背景形成微妙区分 */
+    background-color: #f8f8f8;
+    /* 使用一个柔和的、比正文略浅的颜色，暗示这不是作者本人的话 */
+    color: #586069;
+    border-radius: 4px;
+    /* 添加一点圆角与代码块风格统一 */
+
+}
+
+/* --- 嵌套的引用样式 --- */
+/* 当一个引用在另一个引用内部时，我们让它在视觉上“更深”一层 */
+#write blockquote blockquote {
+    /* 增加一点左边距以创建缩进效果 */
+    margin-left: 1rem;
+    /* 背景可以再深一点点，以示区别 */
+    background-color: #f3f3f3;
+}
+
+/* 修正：确保引用内的段落没有多余的上外边距 */
+#write blockquote p {
+    margin-top: 0;
+}
