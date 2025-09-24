@@ -101,6 +101,11 @@ body {
 
 }
 
+#write p {
+    font-family: inherit;
+    line-height: 2;
+}
+
 /* --- 多行代码块样式 --- */
 
 #write .md-fences {
