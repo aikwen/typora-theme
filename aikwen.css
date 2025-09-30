@@ -317,3 +317,83 @@ body {
 #write table td:last-child {
     border-right: none;
 }
+
+/* --- 任务列表/选择框 (Checkbox) 样式 (v2 - Flexbox对齐) --- */
+
+/* 1. 将列表项设置为Flex容器，实现内容垂直居中 */
+#write .task-list-item {
+    display: flex;
+    align-items: center;
+}
+
+/* 2. 隐藏原始的 checkbox */
+#write .task-list-item input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+
+    /* 确保复选框不会被压缩 */
+    flex-shrink: 0;
+
+    /* 尺寸和间距 */
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    /* 与文字的间距 */
+
+    /* 交互和定位 */
+    position: relative;
+    /* 为伪元素提供定位上下文 */
+    cursor: pointer;
+}
+
+/* 3. 自定义未选中状态的框 */
+#write .task-list-item input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fafafa;
+    border: 1px solid #dce0e3;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 4. 鼠标悬停时的效果 */
+#write .task-list-item input[type="checkbox"]:hover::before {
+    border-color: #9e9e9e;
+}
+
+/* 5. 自定义选中状态的框和勾号 */
+#write .task-list-item input[type="checkbox"]:checked::before {
+    background-color: #586069;
+    border-color: #586069;
+}
+
+#write .task-list-item input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    /* 调整勾号位置使其在框内居中 */
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* 6. 已完成任务的文本样式 */
+#write .task-list-item.task-list-done {
+    color: #9e9e9e;
+    text-decoration: line-through;
+}
+
+/* 7. 确保任务列表的默认 list-style 被移除 */
+#write ul.task-list {
+    list-style-type: none;
+    padding-left: 1rem;
+    /* 根据需要调整缩进 */
+}
